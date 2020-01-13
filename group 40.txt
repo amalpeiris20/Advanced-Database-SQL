@@ -1,0 +1,361 @@
+create database Student_Acc
+use Student_Acc
+
+create table Student
+(Stu_Id char(20) not null primary key,
+Stu_Fname varchar(20) not null,
+Stu_Lname varchar(20) not null,
+Stu_Add varchar(20) not null,
+Stu_DoB date not null,
+Stu_Gender char(20) not null);
+
+
+
+create table Student_Tel
+(Stu_Id char(20) not null primary key foreign key REFERENCES Student (Stu_Id),
+Stu_Tel varchar(20) not null );
+
+create table Landlord
+(Llord_Id char(20) not null primary key,
+Llord_Fname varchar(20) not null,
+Llord_Lname varchar(20) not null,
+Llord_Add varchar(20) not null);
+
+
+
+create table Llord_Tel
+(Llord_Id char(20) not null primary key foreign key REFERENCES Landlord (Llord_Id),
+Llord_Tel varchar(20) not null );
+
+create table Property
+(Pro_Id char(20) not null primary key,
+Pro_Name varchar(20) not null,
+Pro_Amount varchar(20) not null,
+Pro_Add varchar(20) not null,
+Max_Num_Ten varchar(20) not null);
+
+
+
+create table Flat
+(Pro_Id char(20) not null primary key foreign key REFERENCES Property (Pro_Id),
+Flat_Id char(20) not null,
+Flat_Type varchar(20) not null );
+
+
+
+create table TerracedHouse
+(Pro_Id char(20) not null primary key foreign key REFERENCES Property (Pro_Id),
+Ter_Hou_Id char(20) not null,
+Ter_Hou_Type varchar(20) not null );
+
+
+
+create table DetachedHouse
+(Pro_Id char(20) not null primary key foreign key REFERENCES Property (Pro_Id),
+Det_Hou_Id char(20) not null,
+Det_Hou_Type varchar(20) not null );
+
+
+create table Fee
+(Llord_Id char(20) not null primary key foreign key REFERENCES Landlord (Llord_Id),
+Pro_Id char(20) not null foreign key REFERENCES Property (Pro_Id),
+Llord_Fee varchar(20) not null);
+
+
+create table ViewDate
+(Stu_Id char(20) not null primary key foreign key REFERENCES Student (Stu_Id),
+Pro_Id char(20) not null foreign key REFERENCES Property (Pro_Id),
+Stu_View_Da date not null);
+
+insert into Student values
+('S/101','Amal','Peiris','Katugustota/Kandy','1997-01-01','M'),
+('S/102','Anton','Bandara','Yakkala/Gampaha','1998-02-02','M'),
+('S/103','Hirushi','Guruge','Wattala/Colombo','1998-03-03','F'),
+('S/104','Thisuri','Guruge','Manikgama/Rathnapura','2001-04-04','F'),
+('S/105','Hansaja','Habarangamuwa','Yala/Galle','1999-05-05','M'),
+('S/106','Chamara','Rox','Dumbara/Kandy','1997-06-06','M'),
+('S/107','Radeena','Gunasekara','kottawa/Colombo','2002-07-07','F'),
+('S/108','Channa','Janitha','GallFort/Galle','2003-08-08','M'),
+('S/109','Kavindi','Jayawardhana','Nallur/Jaffna','1996-09-09','F'),
+('S/110','Lakshan','Bandara','dikwalla/Mathara','1997-01-10','M')
+
+insert into Student_Tel values
+('S/101','0771234567'),
+('S/102','0761111111'),
+('S/103','0712222222'),
+('S/104','0703333333'),
+('S/105','0724444444'),
+('S/106','0755555555'),
+('S/107','0786666666'),
+('S/108','0768645953'),
+('S/109','0725864695'),
+('S/110','0775544693')
+
+insert into Landlord values
+('L/101','Sajith','Karunathilake','99/Hoamagama'),
+('L/102','Manel','Jayasekara','8A/Gampaha'),
+('L/103','Thilak','Gamage','7/Colombo'),
+('L/104','Piyal','Wijesinghe','221/Maharagama'),
+('L/105','Kosala','Prasanna','54N/Kottawa'),
+('L/106','Kusal','Akarawita','Godagama/Homagama'),
+('L/107','Kumara','Gunasekara','Makubura/Homagama'),
+('L/108','Himala','Janitha','Panagoda/Pitipana'),
+('L/109','Dinithi','Jayawardhana','31B/Maharagama'),
+('L/110','Maduni','Bandara','54C/Nugegoda')
+
+
+
+
+insert into Llord_Tel values
+('L/101','0112456983'),
+('L/102','0112568694'),
+('L/103','0115683214'),
+('L/104','0115468325'),
+('L/105','0117825644'),
+('L/106','0111546548'),
+('L/107','0112369455'),
+('L/108','0112556585'),
+('L/109','0112135585'),
+('L/110','0115457865')
+
+
+
+
+insert into Property values
+      ('P/201','Kadalla','Rs.5000','Pitipana/Homagama','10'),
+      ('P/202','NSBM Hostel','Rs.7000','51/Pitipana','2'),
+      ('P/203','M&M Hostel','Rs.10000','74/kottawa','6'),
+      ('P/204','Havelock City','Rs.6000','89/Maharagama','5'),
+      ('P/205','Godagama house','Rs.14000','53/Godagama','2'),
+      ('P/206','campus Hostel','Rs.5000','56B/Panagoda','6'),
+      ('P/207','Green villege','Rs.20000','A9/Padukka','1'),
+      ('P/208','Haritha villege','Rs.15000','54/Pitipana','1'),
+      ('P/209','big flat','Rs.9000','A9/Padukka','3'),
+      ('P/210','Amalya','Rs.15000','2/Dampe','2')
+
+
+insert into Flat values
+('P/202','F/001','Semi Luxury'),
+('P/205','F/002','Luxury'),
+('P/206','F/003','Semi Luxury'),
+('P/209','F/004','Luxury')
+
+202 205 206 209 201 208 210
+insert into TerracedHouse values
+('P/201','T/001','Semi Luxury'),
+('P/208','T/002','Luxury'),
+('P/210','T/003','Luxury')
+
+
+insert into DetachedHouse values
+('P/203','D/001','Luxury'),
+('P/204','D/002','Semi Luxury'),
+('P/207','D/003','Luxury')
+
+
+
+Insert into Fee values
+('L/101','P/201 P/203 P/205','Rs.3000'),
+('L/102','P/202 P/204','Rs.2000'),
+('L/103','P/206','Rs.1000'),
+('L/104','P/207','Rs.1000'),
+('L/105','P/208','Rs.1000'),
+('L/106','P/209 P/210','Rs.2000')
+
+
+Insert into ViewDate values
+('S/101','P/201 P/203 P/205','2020-01-14'),
+('S/102','P/202 P/204','2020-01-16'),
+('S/103','P/206','2020-01-23'),
+('S/104','P/207','2020-01-29'),
+('S/105','P/208','2020-01-25'),
+('S/106','P/209 P/210','2020-01-14')
+
+select * from ViewDate
+
+
+/*Views*/
+
+create view MaleStudents
+as
+SELECT        Stu_Gender,Stu_Fname
+FROM            Student
+WHERE  Stu_Gender='M'
+
+
+select * from MaleStudents
+
+
+
+create view FemaleStudents
+as
+SELECT        Stu_Gender,Stu_Fname
+FROM            Student
+WHERE  Stu_Gender='F'
+
+select * from FemaleStudents
+
+
+create view PropertyDetails
+as
+SELECT        Pro_Name, Pro_Amount
+FROM            Property
+where Max_Num_Ten='1';
+
+select * from PropertyDetails
+
+create view Flattype
+as
+SELECT Pro_Id, Flat_Id
+FROM            Flat
+where Flat_Type='Semi Luxury'
+
+select * from Flattype
+
+create view PropertyValue
+as
+SELECT        Pro_Id, Pro_Name
+FROM            Property
+where Pro_Amount='Rs.5000'
+
+
+select * from PropertyValue
+
+create view StudentName
+as
+SELECT        Stu_Id, Stu_Fname , Stu_Add, Stu_Gender
+FROM            Student
+where  Stu_Lname='Guruge'
+
+select * from StudentName
+
+
+
+CREATE TRIGGER Student_Update
+ON Student
+AFTER UPDATE
+AS
+   SELECT * FROM Student
+
+
+UPDATE Student
+SET Stu_Dob='1997-01-01'
+WHERE Stu_Id='S/101'
+
+CREATE TRIGGER Student_Insert
+ON Student
+AFTER INSERT
+AS
+   SELECT * FROM Student
+   where Stu_Dob>='1996-01-01'
+
+INSERT INTO Student
+VALUES ('S/120','Kamal','Perera','21/Colombo','1995-01-01','M')
+
+
+
+CREATE TRIGGER Student_Delete
+ON Student
+AFTER DELETE
+AS
+   SELECT * FROM Student
+   where Stu_Dob>='1996-01-01'
+
+DELETE FROM Student
+WHERE Stu_Dob='S/120'
+
+
+/*Scalar Function*/
+
+CREATE FUNCTION Find_Student (@Stu_Id varchar(20)) 
+RETURNS varchar(20)
+As
+BEGIN
+RETURN (SELECT Stu_Fname
+        FROM Student
+        WHERE Stu_ID=@Stu_Id)
+END
+
+
+SELECT dbo.Find_Student('S/102')
+
+
+/*Inline Table-Valued Function*/
+
+
+CREATE FUNCTION Landlord_Details (@Llord_Id varchar(20)) 
+RETURNS TABLE
+As
+RETURN (SELECT Llord_Id,Llord_Fname,Llord_Lname,Llord_Add
+        FROM Landlord
+        WHERE Llord_Id=@Llord_Id)
+
+
+SELECT * FROM Landlord_Details ('L/108')
+
+
+/*Inline Table-Valued Function*/
+
+
+CREATE FUNCTION All_Property_Details (@Max_Num_Ten varchar(20)) 
+RETURNS TABLE
+As
+RETURN (SELECT Pro_Id,Pro_Name,Pro_Amount,Pro_Add
+        FROM Property
+        WHERE Max_Num_Ten=@Max_Num_Ten)
+
+
+SELECT * FROM All_Property_Details ('1')
+
+CREATE PROCEDURE spCountStudent
+@ID  varchar(20),
+@amount varchar(20)
+AS
+BEGIN
+  DECLARE @Max_Num_Ten varchar(20)
+  SELECT  @Max_Num_Ten =COUNT(Pro_Id) From Property
+  where @ID=Pro_Id AND @amount=Pro_Amount
+  
+  PRINT @Max_Num_Ten
+END
+
+EXEC spCountProperty 'P/203','Rs.10000'
+
+EXEC spCountProperty @ID'P/207',@amount'Rs.20000'
+
+
+
+
+CREATE PROCEDURE spStudents
+   @DOB varchar(20)
+   @classCount char(20)
+AS 
+   SELECT @classCount=COUNT()
+   FROM Student
+   Where DOB=Stu_Dob
+
+DECLARE @count int
+EXEC spStudents @DOB='1998' , @classCount=@count
+print @count
+
+CREATE PROCEDURE spFindStudent
+    @id char (20)
+As
+SELECT Stu_Fname, Dno FROM Student WHERE
+  Stu_Id =@id
+
+EXEC spFindStudent 'S/101'
+EXEC spFindStudent @id = 'S/108'
+
+
+
+
+
+
+
+
+
+
+
+
+
